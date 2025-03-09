@@ -1,0 +1,19 @@
+import string
+from itertools import permutations
+
+def decrypt_monoalphabetic(ciphertext, key):
+    alphabet = string.ascii_uppercase
+    mapping = str.maketrans(key, alphabet)
+    return ciphertext.translate(mapping)
+
+def brute_force_monoalphabetic(ciphertext):
+    alphabet = string.ascii_uppercase
+    possible_keys = permutations(alphabet)
+    
+    for key in possible_keys:
+        decrypted_text = decrypt_monoalphabetic(ciphertext, "".join(key))
+        print("Possible decryption:", decrypted_text)  # Output all possibilities
+
+ciphertext = "GDKKN VNQKC"
+
+brute_force_monoalphabetic(ciphertext)
