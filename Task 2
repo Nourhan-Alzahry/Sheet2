@@ -18,7 +18,7 @@ def frequency_analysis(ciphertext):
     
     return decrypt_monoalphabetic(ciphertext, mapping)
 
-ciphertext = "yvccf nficu"  # يمكن استبداله بأي نص آخر لاختباره
+ciphertext = "yvccf nficu"  
 
 decrypted_text = frequency_analysis(ciphertext)
 
