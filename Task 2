@@ -5,16 +5,21 @@ def decrypt_monoalphabetic(ciphertext, mapping):
     return "".join(mapping.get(char, char) for char in ciphertext)
 
 def frequency_analysis(ciphertext):
+    cipher_freq = Counter(char for char in ciphertext if char.isalpha())
+    
+    cipher_letters = sorted(cipher_freq.keys())
+    
     english_freq_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
     
-    cipher_freq = Counter(char for char in ciphertext if char.isalpha())
-    sorted_cipher_letters = [pair[0] for pair in cipher_freq.most_common()]
+    mapping = {}
     
-    mapping = {cipher: plain for cipher, plain in zip(sorted_cipher_letters, english_freq_order)}
+    for i, cipher_char in enumerate(cipher_letters):
+        mapping[cipher_char] = english_freq_order[i]
     
     return decrypt_monoalphabetic(ciphertext, mapping)
 
-ciphertext = "YVCCF NFICU"
+ciphertext = "yvccf nficu"  # يمكن استبداله بأي نص آخر لاختباره
 
 decrypted_text = frequency_analysis(ciphertext)
+
 print("Decrypted Text:", decrypted_text)
