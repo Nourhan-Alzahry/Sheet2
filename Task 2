@@ -1,0 +1,20 @@
+import string
+from collections import Counter
+
+def decrypt_monoalphabetic(ciphertext, mapping):
+    return "".join(mapping.get(char, char) for char in ciphertext)
+
+def frequency_analysis(ciphertext):
+    english_freq_order = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+    
+    cipher_freq = Counter(char for char in ciphertext if char.isalpha())
+    sorted_cipher_letters = [pair[0] for pair in cipher_freq.most_common()]
+    
+    mapping = {cipher: plain for cipher, plain in zip(sorted_cipher_letters, english_freq_order)}
+    
+    return decrypt_monoalphabetic(ciphertext, mapping)
+
+ciphertext = "YVCCF NFICU"
+
+decrypted_text = frequency_analysis(ciphertext)
+print("Decrypted Text:", decrypted_text)
